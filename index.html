@@ -428,6 +428,23 @@ body.insite .top,body.insite .main{display:none}
 .gfoot .lk{color:var(--muted);text-decoration:underline}
 @media (max-width:600px){.row{grid-template-columns:auto minmax(0,1fr) auto}.row .ha{display:none!important}.row:hover .tm{visibility:visible}}
 @media (max-width:700px){.gfoot{grid-template-columns:1fr;text-align:left}.gfoot>div{text-align:left!important}}
+.lgw{width:min(1040px,100%);box-sizing:border-box}
+.lg{width:100%;display:grid;grid-template-columns:1fr 1fr;gap:24px 48px;padding:36px 40px 32px;min-height:384px}
+.lg svg{width:48px;height:48px}
+.lg-l h1{font-size:36px;font-weight:400;margin:22px 0 14px}
+.lg-l p{font-size:16px;color:var(--fg)}
+.lg-r{padding-top:62px;display:flex;flex-direction:column}
+.lg-r .fld:first-child{margin-top:0}
+.lg-r>.lk{color:var(--accent);font-size:14px;font-weight:500;margin-top:4px;align-self:flex-start;cursor:pointer}
+.lg-note{margin:36px 0 0!important;font-size:14px!important;color:var(--fg2);line-height:1.5}
+.lg-note .lk{color:var(--accent);font-weight:500;margin-left:4px;cursor:pointer}
+.lg .lgf{margin-top:auto;padding-top:32px;justify-content:flex-end;gap:12px}
+.lg .lk2{padding:10px 16px;border-radius:20px;cursor:pointer}.lg .lk2:hover{background:var(--row-hover)}
+
+.lg-foot{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;font-size:12px;color:var(--fg2)}
+.lg-foot>span:first-child{display:flex;align-items:center;gap:2px;cursor:pointer}.lg-foot svg{width:18px;height:18px;fill:currentColor}
+.lg-links{display:flex;gap:28px}.lg-links span{cursor:pointer}
+@media (max-width:840px){#login{place-items:start center;padding:0}.lgw{width:100%}.lg{grid-template-columns:minmax(0,1fr);border-radius:0;padding:28px 24px;min-height:0}.lg-r{padding-top:0}.lg-l h1{font-size:28px;margin:16px 0 8px}.lg-links{gap:18px}}
 </style>
 
 <header class="top">
@@ -459,16 +476,21 @@ body.insite .top,body.insite .main{display:none}
   <aside class="side" aria-label="附加應用程式"><span class="sa" title="日曆"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="17" rx="2" fill="#4285f4"/><rect x="5" y="9" width="14" height="10" fill="#fff"/><text x="12" y="17.5" font-size="8" text-anchor="middle" fill="#4285f4" font-weight="700">13</text></svg></span><span class="sa" title="記事"><svg viewBox="0 0 24 24"><path d="M5 2h10l4 4v16H5z" fill="#fbbc04"/><path d="M15 2v4h4z" fill="#e09c00"/><circle cx="12" cy="12" r="3" fill="#fff"/><rect x="10.5" y="15" width="3" height="2" fill="#fff"/></svg></span><span class="sa" title="待辦事項"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="#1a73e8"/><path d="M8 12.5l2.7 2.7L16.5 9.5" stroke="#fff" stroke-width="2.2" fill="none"/></svg></span><span class="sa" title="聯絡人"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="#1a73e8"/><circle cx="12" cy="10" r="3" fill="#fff"/><path d="M6.5 17.5c1.2-2.2 3.2-3 5.5-3s4.3.8 5.5 3" fill="#fff"/></svg></span><span class="sline"></span><span class="sa" title="取得外掛程式">＋</span></aside>
 </div>
 <div id="login" hidden>
+  <div class="lgw">
   <form class="lg" id="lgform" autocomplete="off">
-    <svg viewBox="0 0 24 24"><defs><linearGradient id="lgo" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ff7a59"/><stop offset="1" stop-color="#e8453c"/></linearGradient></defs><rect x="1" y="1" width="22" height="22" rx="6" fill="url(#lgo)"/><rect x="5" y="7.5" width="14" height="10" rx="1.6" fill="#fff"/><path d="M5.6 8.3l6.4 4.8 6.4-4.8" fill="none" stroke="#e8453c" stroke-width="1.6" stroke-linejoin="round"/></svg>
-    <h1>登入</h1>
-    <p>使用你的禾森科技帳戶</p>
-    <label class="fld"><input id="lg-name" placeholder=" " maxlength="10"><span>姓名</span></label>
-    <div class="lgerr" id="lg-err"></div>
-    <label class="fld"><input id="lg-acct" type="email" placeholder=" " maxlength="60" autocomplete="off"><span>公司電子郵件（可不填）</span></label>
-    <div class="lgerr" id="lg-err2"></div>
-    <div class="lgf"><span class="lk">忘記電子郵件地址？</span><button class="send" type="submit">下一步</button></div>
+    <div class="lg-l"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="1" y="1" width="22" height="22" rx="6" fill="#e8453c"/><rect x="5" y="7.5" width="14" height="10" rx="1.6" fill="#fff"/><path d="M5.6 8.3l6.4 4.8 6.4-4.8" fill="none" stroke="#e8453c" stroke-width="1.6" stroke-linejoin="round"/></svg><h1>登入</h1><p>使用你的禾森科技帳戶</p></div>
+    <div class="lg-r">
+      <label class="fld"><input id="lg-name" placeholder=" " maxlength="10"><span>姓名</span></label>
+      <div class="lgerr" id="lg-err"></div>
+      <label class="fld"><input id="lg-acct" type="email" placeholder=" " maxlength="60" autocomplete="off"><span>公司電子郵件（可不填）</span></label>
+      <div class="lgerr" id="lg-err2"></div>
+      <span class="lk">忘記電子郵件地址？</span>
+      <p class="lg-note">不是你的電腦嗎？請使用無痕視窗登入，用完記得登出。<span class="lk">了解詳情</span></p>
+      <div class="lgf"><span class="lk lk2">建立帳戶</span><button class="send" type="submit">下一步</button></div>
+    </div>
   </form>
+  <div class="lg-foot"><span>繁體中文（台灣）<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10l5 5 5-5z"/></svg></span><span class="lg-links"><span>說明</span><span>隱私權</span><span>條款</span></span></div>
+  </div>
 </div>
 <div class="snack" id="snack" hidden></div>
 <div id="viewer" hidden></div>
