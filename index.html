@@ -478,18 +478,18 @@ body.insite .top,body.insite .main{display:none}
 <div id="login" hidden>
   <div class="lgw">
   <form class="lg" id="lgform" autocomplete="off">
-    <div class="lg-l"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="1" y="1" width="22" height="22" rx="6" fill="#e8453c"/><rect x="5" y="7.5" width="14" height="10" rx="1.6" fill="#fff"/><path d="M5.6 8.3l6.4 4.8 6.4-4.8" fill="none" stroke="#e8453c" stroke-width="1.6" stroke-linejoin="round"/></svg><h1>登入</h1><p>使用你的禾森科技帳戶</p></div>
+    <div class="lg-l"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="1" y="1" width="22" height="22" rx="6" fill="#e8453c"/><rect x="5" y="7.5" width="14" height="10" rx="1.6" fill="#fff"/><path d="M5.6 8.3l6.4 4.8 6.4-4.8" fill="none" stroke="#e8453c" stroke-width="1.6" stroke-linejoin="round"/></svg><h1>登入</h1><p>使用你的公司帳戶繼續</p></div>
     <div class="lg-r">
       <label class="fld"><input id="lg-name" placeholder=" " maxlength="10"><span>姓名</span></label>
       <div class="lgerr" id="lg-err"></div>
       <label class="fld"><input id="lg-acct" type="email" placeholder=" " maxlength="60" autocomplete="off"><span>公司電子郵件（可不填）</span></label>
       <div class="lgerr" id="lg-err2"></div>
-      <span class="lk">忘記電子郵件地址？</span>
-      <p class="lg-note">不是你的電腦嗎？請使用無痕視窗登入，用完記得登出。<span class="lk">了解詳情</span></p>
-      <div class="lgf"><span class="lk lk2">建立帳戶</span><button class="send" type="submit">下一步</button></div>
+      <span class="lk" data-tip="請洽貴公司資訊部門協助">忘記電子郵件地址？</span>
+      <p class="lg-note">不是你的電腦嗎？請使用無痕視窗登入，用完記得登出。<span class="lk" data-tip="無痕視窗不會留下瀏覽紀錄，關閉後自動登出">了解詳情</span></p>
+      <div class="lgf"><span class="lk lk2" data-tip="公司帳戶由資訊部門統一建立">建立帳戶</span><button class="send" type="submit">下一步</button></div>
     </div>
   </form>
-  <div class="lg-foot"><span>繁體中文（台灣）<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10l5 5 5-5z"/></svg></span><span class="lg-links"><span>說明</span><span>隱私權</span><span>條款</span></span></div>
+  <div class="lg-foot"><span data-tip="目前僅提供繁體中文">繁體中文（台灣）<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10l5 5 5-5z"/></svg></span><span class="lg-links"><span data-tip="請洽貴公司資訊部門協助">說明</span><span data-tip="請洽貴公司資訊部門協助">隱私權</span><span data-tip="請洽貴公司資訊部門協助">條款</span></span></div>
   </div>
 </div>
 <div class="snack" id="snack" hidden></div>
@@ -804,6 +804,7 @@ ORDER_START.forEach((id, i) => { if (!S.arrived.some(a => a.id === id)) S.arrive
 window.claude?.hot?.snapshot?.(() => ({S}));
 function save(){ try { localStorage.setItem(KEY, JSON.stringify(S)); } catch(e){} }
 // 答對後的回覆和下一封信是幾秒後才寄到；這段時間內重新整理會漏掉，載入時補上
+document.addEventListener("click", ev => { const t = ev.target.closest && ev.target.closest("#login [data-tip]"); if (t) snack(t.dataset.tip); });
 function recover(){
   const t0 = new Date().toLocaleTimeString("zh-TW",{hour:"numeric",minute:"2-digit",hour12:true});
   Object.keys(S.solved).forEach(id => { const m = MAILS[id]; if (!m) return;
