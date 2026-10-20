@@ -836,7 +836,7 @@ const esc = s => String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>
 const now = () => new Date().toLocaleTimeString("zh-TW",{hour:"numeric",minute:"2-digit",hour12:true});
 const norm = s => s.normalize("NFKC").toLowerCase().replace(/[\s，。、！？!?,.「」『』"'：:；;（）()\-—~～]/g, "");
 const matches = (text, list) => { const n = norm(text); return list.some(a => { const x = norm(a); return n === x || (n.includes(x) && n.length <= x.length + 8); }); };
-const drafts = {}; let bossFrom = undefined, replyOpen = {};
+const drafts = {}; let replyOpen = {};
 const wronged = () => !!S.alt.s13;
 const replyOf = id => (S.alt[id] && MAILS[id].alt.reply) || MAILS[id].reply;
 const nextOf = id => (S.alt[id] && MAILS[id].alt.next) || MAILS[id].next;
@@ -879,7 +879,7 @@ function failOtpBody(){
   <p>請立即至三樓資訊安全組說明（分機 2300）。</p><div class="sig">禾森科技 帳號安全中心／資訊安全組</div>`;
 }
 function renderFailbar(){
-  const box = $("failbar"), on = !!(S.name && S.failed && ["fail","failotp","faillin"].includes(S.open) && !S.site && bossFrom === undefined);
+  const box = $("failbar"), on = !!(S.name && S.failed && ["fail","failotp","faillin"].includes(S.open) && !S.site);
   box.hidden = !on; if (on) box.innerHTML = `<span>✕ 任務失敗</span><button data-act="retry">↺ 回到失敗之前，重新來過</button>`;
 }
 function failLinBody(){
@@ -1469,7 +1469,7 @@ document.addEventListener("click", ev => {
     if (t.dataset.armed !== "1"){ t.dataset.armed = "1"; t.textContent = "確定要清除嗎？再按一次"; return; }
     S = fresh(); save(); t.dataset.armed = ""; t.textContent = "清除這個信箱的資料（從頭開始）"; $("menu").hidden = true; render(); updateCount(); return;
   }
-  if (t.dataset.open){ $("snack").hidden = true; bossFrom = undefined; S.site = null; open(t.dataset.open); return; }
+  if (t.dataset.open){ $("snack").hidden = true; S.site = null; open(t.dataset.open); return; }
   const a = t.dataset.act;
   if (a === "back"){ S.open = null; save(); render(); }
   if (a === "reply"){ const m = MAILS[S.open]; if (S.failed) snack("請先打開失敗通知信，按「重新來過」"); else if (!m.answer && !m.check) snack("這封郵件不需要回覆"); else if (S.solved[S.open]) snack("這封郵件已經回覆過了"); else { replyOpen[S.open] = true; render(); } }
@@ -1522,8 +1522,6 @@ document.addEventListener("keydown", ev => {
   if (ev.key === "Enter" && (ev.target.id === "pp" || ev.target.id === "pa")){ ev.preventDefault(); plogin(); return; }
   if (ev.key === "Escape" && S.name){
     ev.preventDefault(); $("snack").hidden = true; VW = null; renderViewer(); PK = null; renderPicker(); DLP = false; renderDlp();
-    if (bossFrom !== undefined){ const b = bossFrom; bossFrom = undefined; S.site = b.site; if (b.open) open(b.open); else { S.open = null; save(); render(); } }
-    else { bossFrom = {open:S.open, site:S.site}; S.site = null; open("hr"); }
   }
 });
 
