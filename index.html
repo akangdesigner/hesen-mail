@@ -66,7 +66,7 @@ button{font-family:inherit}
 .tabx[data-tab]:not(.on):hover{background:var(--row-hover)}
 .pnew{background:#188038;color:#fff;font-size:11px;border-radius:10px;padding:1px 8px;margin-left:4px;font-weight:500}
 .tabx svg{width:20px;height:20px;fill:currentColor;flex:none}
-@media (max-width:600px){.tabx:not(.on){display:none}}
+@media (max-width:600px){.tabx:not([data-tab]){display:none}.tabx{width:50%;max-width:none;gap:8px;padding-inline:12px;white-space:nowrap}.tabx svg{display:none}}
 .row{all:unset;box-sizing:border-box;display:grid;grid-template-columns:auto auto 190px minmax(0,1fr) auto;align-items:center;height:40px;padding-right:16px;border-bottom:1px solid var(--line);background:var(--row-read);cursor:pointer;width:100%}
 .row.unread{background:var(--card)}
 .row:hover{box-shadow:inset 1px 0 0 #dadce0,inset -1px 0 0 #dadce0,0 1px 2px 0 #3c40434d;position:relative;z-index:1}
@@ -424,6 +424,7 @@ body.insite .top,body.insite .main{display:none}
 .bar .pg .ib.sm,.vbar .pg .ib.sm,.vhr .ib.sm{width:32px;height:32px}
 .ib.sm svg{width:18px;height:18px}
 .vbar .pg{margin-left:auto;color:var(--muted);font-size:12px;display:flex;align-items:center;gap:4px;white-space:nowrap;padding-right:8px}
+@media (max-width:600px){.vbar .pg{display:none}}
 .vhr{margin-left:auto;display:flex;gap:2px}
 .mh .tm{display:flex;align-items:center;gap:2px}
 .mh .mi{display:inline-grid;place-items:center;width:32px;height:32px;border-radius:50%;color:var(--muted);font-size:17px;cursor:default}
@@ -547,8 +548,8 @@ const ADS = {
   // 青遠辦公設備的電子報版型（真的那封和偽裝的那封長得一樣）
   qy: (greet, title, sub, body, cta, note) => `<div style="max-width:560px;margin:0 auto;background:#fff;color:#333;font-family:'PingFang TC','Microsoft JhengHei',sans-serif;border:1px solid #e6e1ee">
     <div style="display:flex;justify-content:space-between;align-items:center;padding:14px 22px"><b style="color:#8a5bb0;font-size:18px">青遠辦公設備</b><span style="font-size:12px;color:#999">會員電子報</span></div>
-    <div style="display:grid;grid-template-columns:1fr 150px;align-items:center;background:#f4eefa;padding:20px 22px;gap:12px"><div><div style="font-size:12px;color:#8a5bb0;letter-spacing:2px">${sub}</div><div style="font-size:22px;font-weight:700;color:#4a2f63;margin-top:4px">${title}</div></div>
-      <svg viewBox="0 0 150 100" width="150" height="100"><rect x="20" y="62" width="110" height="8" rx="3" fill="#8a5bb0"/><rect x="28" y="70" width="6" height="26" fill="#6d4590"/><rect x="116" y="70" width="6" height="26" fill="#6d4590"/><rect x="50" y="20" width="34" height="34" rx="6" fill="#c9b3dd"/><rect x="58" y="54" width="18" height="8" fill="#a98bc4"/><rect x="92" y="28" width="30" height="26" rx="5" fill="#dccbea"/></svg></div>
+    <div style="display:flex;flex-wrap:wrap;align-items:center;background:#f4eefa;padding:20px 22px;gap:12px"><div style="flex:1 1 180px"><div style="font-size:12px;color:#8a5bb0;letter-spacing:2px">${sub}</div><div style="font-size:22px;font-weight:700;color:#4a2f63;margin-top:4px">${title}</div></div>
+      <svg viewBox="0 0 150 100" width="150" height="100" style="flex:none;max-width:100%"><rect x="20" y="62" width="110" height="8" rx="3" fill="#8a5bb0"/><rect x="28" y="70" width="6" height="26" fill="#6d4590"/><rect x="116" y="70" width="6" height="26" fill="#6d4590"/><rect x="50" y="20" width="34" height="34" rx="6" fill="#c9b3dd"/><rect x="58" y="54" width="18" height="8" fill="#a98bc4"/><rect x="92" y="28" width="30" height="26" rx="5" fill="#dccbea"/></svg></div>
     <div style="padding:18px 22px;line-height:1.8">${greet}${body}<div style="margin:14px 0"><span style="background:#8a5bb0;color:#fff;padding:9px 24px;border-radius:20px;font-weight:700">${cta}</span></div>${note}</div>
     <div style="background:#faf8fc;color:#aaa;font-size:11px;padding:10px 22px">青遠辦公設備有限公司｜客服 (02) 2655-0870｜取消訂閱</div></div>`,
   // 健身房：深色＋螢光綠
